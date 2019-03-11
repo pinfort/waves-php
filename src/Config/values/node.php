@@ -1,0 +1,8 @@
+<?php
+
+return [
+    'NODE' => 'https://nodes.wavesnodes.com',
+    'MATCHER' => 'http://matcher.wavesnodes.com',
+    'MATCHER_PUBLICKEY' => '',
+    'DATAFEED' => 'http://marketdata.wavesplatform.com',
+];
