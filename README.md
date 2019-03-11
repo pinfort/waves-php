@@ -17,7 +17,7 @@ Please install this extension to your PHP first. Do you want to know how to inst
 
     \Pinfort\wavesPHP\Api\Addresses::fetchAddresses();
 
-##Documents
+## Documents
 
 TBD
 
