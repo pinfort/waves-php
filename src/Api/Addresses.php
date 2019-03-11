@@ -14,6 +14,6 @@ class Addresses extends ApiBase
 
     public static function createAddress()
     {
-
+        return self::post('/addresses');
     }
 }
