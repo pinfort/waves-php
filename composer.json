@@ -13,7 +13,8 @@
         "stephenhill/base58": "^1.1",
         "guzzlehttp/guzzle": "^6.3",
         "ext-mbstring": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-BLAKE2": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0",
