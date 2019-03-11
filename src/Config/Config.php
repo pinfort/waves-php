@@ -9,6 +9,18 @@ class Config
     use Singleton;
 
     private $config = [];
+    private static $values_directory = __DIR__ . '/values/';
+
+    private function __construct()
+    {
+        foreach (self::getFileNames() as $target) {
+            $values = include $target;
+            $filename = basename($target, '.php');
+            foreach ($values as $key => $value) {
+                $this->config[$filename . '.' . $key] = $value;
+            }
+        }
+    }
 
     /**
      * @param string $key
@@ -38,11 +50,9 @@ class Config
 
         return $config;
     }
-}
 
-// function setNode($node = null, $chain = null, $chain_id = null)
-// {
-//     $NODE = $node;
-//     $CHAIN = $chain;
-//     $CHAIN_ID = $chain_id;
-// }
+    private static function getFileNames()
+    {
+        return glob(self::$values_directory . '*.php');
+    }
+}
