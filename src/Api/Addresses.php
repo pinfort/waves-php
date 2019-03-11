@@ -16,4 +16,14 @@ class Addresses extends ApiBase
     {
         return self::post('/addresses');
     }
+
+    public static function verifySignatureByAddress(string $address, array $data)
+    {
+        return self::post("/addresses/verify/$address", $data);
+    }
+
+    public static function fetchAllDataByAddress(string $address)
+    {
+        return self::post("/addresses/data/$address");
+    }
 }
