@@ -4,8 +4,8 @@ WavesPHP is API clients for Waves blockchain platform written in PHP.
 ## Installation
 *This library is Work in Progress.(not yet on release)*
 
-This library depends on [PHP-blake2](https://github.com/strawbrary/php-blake2).
-Please install this extension to your PHP first. Do you want to know how to install PHP extentions to Windows? Below slide is useful.
+This library depends on [PHP-blake2](https://github.com/strawbrary/php-blake2) and [curve25519-PHP](https://github.com/mgp25/curve25519-php).
+Please install these extension to your PHP first. Do you want to know how to install PHP extentions to Windows? Below slide is useful.
 
 [Windows で拡張モジュールをビルドしてみた](https://www.slideshare.net/y-uti/windows-60158242)（日本語, Japanese）
 
@@ -13,7 +13,7 @@ Please install this extension to your PHP first. Do you want to know how to inst
 
     composer install pinfort/waves-php
 
-## Usage
+## Example usage
 
     \Pinfort\wavesPHP\Api\Addresses::fetchAddresses();
 
