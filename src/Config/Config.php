@@ -13,13 +13,7 @@ class Config
 
     private function __construct()
     {
-        foreach (self::getFileNames() as $target) {
-            $values = include $target;
-            $filename = basename($target, '.php');
-            foreach ($values as $key => $value) {
-                $this->config[$filename . '.' . $key] = $value;
-            }
-        }
+        $this->initialize();
     }
 
     /**
@@ -54,5 +48,16 @@ class Config
     private static function getFileNames()
     {
         return glob(self::$values_directory . '*.php');
+    }
+
+    private function initialize()
+    {
+        foreach (self::getFileNames() as $target) {
+            $values = include $target;
+            $filename = basename($target, '.php');
+            foreach ($values as $key => $value) {
+                $this->config[$filename . '.' . $key] = $value;
+            }
+        }
     }
 }
