@@ -16,7 +16,7 @@ Please install these extensions to your PHP first. Do you want to know how to in
 
 ## Example usage
 
-    \Pinfort\wavesPHP\Api\Addresses()->fetchAddresses();
+    \Pinfort\wavesPHP\Api\Node\Addresses()->fetchAddresses();
 
 ## Documents
 
