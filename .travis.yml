@@ -1,0 +1,18 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+
+before_script:
+  - ci/bin/build_blake2.sh
+  - ci/bin/build_curve25519.sh
+  - curl -s http://getcomposer.org/installer | php
+  - phpenv config-add ci/php.ini
+  - php composer.phar install --dev
+
+script: vendor/bin/phpunit
+
+after_success:
+  - travis_retry php vendor/bin/php-coveralls -v
