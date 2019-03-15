@@ -26,6 +26,7 @@ class NodeConfig
     }
 
     /**
+     * Get node host.
      * @return string
      */
     public static function getNode(): string

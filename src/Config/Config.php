@@ -5,7 +5,7 @@ namespace Pinfort\wavesPHP\Config;
 use Pinfort\wavesPHP\Config\Traits\Singleton;
 
 /**
- * Class Config
+ * Configuration management class
  * @package Pinfort\wavesPHP\Config
  * @access public
  * @author pinfort <ptg@nijitei.com>
@@ -16,11 +16,13 @@ class Config
     use Singleton;
 
     /**
+     * Configuration array. We save all configurations in this array.
      * @var array
      */
     private $config = [];
 
     /**
+     * Directory path to configuration files.
      * @var string
      */
     private static $valuesDirectory = __DIR__ . '/values/';
@@ -48,7 +50,6 @@ class Config
     /**
      * Get config by key.
      * @param string $key Key to get.
-     *
      * @return mixed
      */
     public static function get(string $key)
