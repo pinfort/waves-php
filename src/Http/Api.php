@@ -11,6 +11,7 @@ use GuzzleHttp;
  *
  * This class DO HTTP access to Nodes or else.
  *
+ * @package Pinfort\wavesPHP\Http
  * @access public
  * @author pinfort <ptg@nijitei.com>
  * @category Http

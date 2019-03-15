@@ -2,6 +2,13 @@
 
 namespace Pinfort\wavesPHP\Http;
 
+/**
+ * Interface of api class
+ * @package Pinfort\wavesPHP\Http
+ * @access public
+ * @author pinfort <ptg@nijitei.com>
+ * @category Http
+ */
 interface ApiInterface
 {
     /**
