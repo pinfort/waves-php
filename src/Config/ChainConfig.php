@@ -2,9 +2,22 @@
 
 namespace Pinfort\wavesPHP\Config;
 
+/**
+ * Specialized class for configuration about chain.
+ * @package Pinfort\wavesPHP\Config
+ * @access public
+ * @author pinfort <ptg@nijitei.com>
+ * @category Config
+ */
 class ChainConfig
 {
-    public static function setChain(string $chain, string $chainId)
+    /**
+     * Set chain config.
+     * @param string $chain Chain name.
+     * @param string $chainId Chain id (1 character).
+     * @return void
+     */
+    public static function setChain(string $chain, string $chainId): void
     {
         if (is_null($chainId)) {
             switch (mb_strtolower($chain)) {

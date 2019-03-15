@@ -4,21 +4,40 @@ namespace Pinfort\wavesPHP\Config;
 
 use Pinfort\wavesPHP\Config\Traits\Singleton;
 
+/**
+ * Class Config
+ * @package Pinfort\wavesPHP\Config
+ * @access public
+ * @author pinfort <ptg@nijitei.com>
+ * @category Config
+ */
 class Config
 {
     use Singleton;
 
+    /**
+     * @var array
+     */
     private $config = [];
-    private static $values_directory = __DIR__ . '/values/';
 
+    /**
+     * @var string
+     */
+    private static $valuesDirectory = __DIR__ . '/values/';
+
+    /**
+     * Config constructor.
+     */
     private function __construct()
     {
         $this->initialize();
     }
 
     /**
-     * @param string $key
-     * @param $value
+     * Set new config | Update config
+     * @param string $key Key to set.
+     * @param mixed $value Value to set.
+     * @return void
      */
     public static function set(string $key, $value): void
     {
@@ -27,7 +46,8 @@ class Config
     }
 
     /**
-     * @param string $key
+     * Get config by key.
+     * @param string $key Key to get.
      *
      * @return mixed
      */
@@ -38,20 +58,33 @@ class Config
         return $config[$key];
     }
 
-    public static function getAll()
+    /**
+     * Get all config.
+     * @return array
+     */
+    public static function getAll(): array
     {
         $config = self::getInstance()->config;
 
         return $config;
     }
 
-    private static function getFileNames()
+    /**
+     * Get name of configuration files.
+     * @return array
+     */
+    private static function getFileNames(): array
     {
-        return glob(self::$values_directory . '*.php');
+        return glob(self::$valuesDirectory . '*.php');
     }
 
-    private function initialize()
+    /**
+     * Initialize | Reset configuration.
+     * @return void
+     */
+    private function initialize(): void
     {
+        $this->config = [];
         foreach (self::getFileNames() as $target) {
             $values = include $target;
             $filename = basename($target, '.php');
