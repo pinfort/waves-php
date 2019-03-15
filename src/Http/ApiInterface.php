@@ -11,7 +11,7 @@ interface ApiInterface
      * @param array $headers Set additional header. Key-value style.
      * @return mixed
      */
-    public function get(string $path, ?string $host = null, array $headers = []);
+    public function get(string $path, ?string $host = null, array $headers = []): array;
 
 
     /**
@@ -22,5 +22,5 @@ interface ApiInterface
      * @param array $headers Set additional header. Key-value style.
      * @return mixed
      */
-    public function post(string $path, ?array $postData = null, ?string $host = null, array $headers = []);
+    public function post(string $path, ?array $postData = null, ?string $host = null, array $headers = []): array;
 }
