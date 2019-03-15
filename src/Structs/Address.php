@@ -7,22 +7,71 @@ use Pinfort\wavesPHP\Utils\Validate;
 use StephenHill\Base58;
 use Pinfort\wavesPHP\Utils\Crypto;
 
+/**
+ * Address struct.
+ * @package Pinfort\wavesPHP\Structs
+ * @access public
+ * @author pinfort <ptg@nijitei.com>
+ * @category Structs
+ */
 class Address
 {
+    /**
+     * @var string Base58 encoded address.
+     */
     public $address = '';
+
+    /**
+     * @var string Public key.
+     */
     public $publicKey = '';
+
+    /**
+     * @var string Private key.
+     */
     public $privateKey = '';
+
+    /**
+     * @var string Seed.
+     */
     public $seed = '';
+
+    /**
+     * @var string Alias.
+     */
     public $alias = '';
+
+    /**
+     * @var integer Nonce.
+     */
     public $nonce = 0;
-    public $balances;
+
+    /**
+     * @var array Balances of assets.
+     */
+    public $balances = [];
+
+    /**
+     * @var Base58 Instance of Base58.
+     */
     private $base58;
 
+    /**
+     * Address constructor.
+     * @throws \Exception Failed make instance.
+     */
     private function __construct()
     {
         $this->base58 = new Base58();
     }
 
+    /**
+     * Get address struct by Base58 encoded address.
+     * @param string $address Base58 encoded address.
+     * @return Address
+     * @throws \InvalidArgumentException Failed validate address.
+     * @throws \Exception Failed make instance.
+     */
     public static function getAddressByAddress(string $address): self
     {
         if (!Validate::validateAddress($address)) {
@@ -33,6 +82,14 @@ class Address
         return $obj;
     }
 
+    /**
+     * Get address struct by seed of address.
+     * @param string $seed Seed of address.
+     * @param int $nonce Nonce of address.
+     * @return Address
+     * @throws \Exception Failed make instance.
+     * @throws \InvalidArgumentException Failed validate nonce.
+     */
     public static function getAddressBySeed(string $seed, int $nonce = 0): self
     {
         if ($nonce < 0 or $nonce > 4294967295) {
@@ -41,27 +98,61 @@ class Address
         return (new self())->generate(null, null, $seed, $nonce);
     }
 
+    /**
+     * Get address struct by public key of address.
+     * @param string $publicKey Public key of address.
+     * @return Address
+     * @throws \Exception Failed make instance.
+     */
     public static function getAddressByPublickey(string $publicKey): self
     {
         return (new self())->generate($publicKey);
     }
 
+    /**
+     * Get address struct by private key of address.
+     * @param string $privateKey Private key of address.
+     * @return Address
+     * @throws \Exception Failed make instance.
+     */
     public static function getAddressByPrivateKey(string $privateKey): self
     {
         return (new self())->generate(null, $privateKey);
     }
 
+    /**
+     * Get address struct by alias of address.
+     * @param string $alias Alias of address.
+     * @return Address
+     * @throws \Exception Failed make instance.
+     */
     public static function getAddressByAlias(string $alias): self
     {
-        // WIP
+        // TODO: implement
+        return (new self())->generate();
     }
 
+    /**
+     * Get address struct by nonce of address.
+     * @param int $nonce Nonce of address.
+     * @return Address
+     * @throws \Exception Failed make instance.
+     */
     public static function getAddressByNonce(int $nonce): self
     {
         return (new self())->generate(null, null, null, $nonce);
     }
 
-    private function generate(string $publicKey = '', string $privateKey = '', string $seed = '', int $nonce = 0)
+    /**
+     * Generate struct by some data.
+     * @param string $publicKey Public key of address.
+     * @param string $privateKey Private key of address.
+     * @param string $seed Seed of address.
+     * @param int $nonce Nonce of address.
+     * @return $this
+     * @throws \Exception Failed make instance.
+     */
+    private function generate(?string $publicKey = '', ?string $privateKey = '', ?string $seed = '', ?int $nonce = 0)
     {
         $this->seed = $seed;
         $this->nonce = $nonce;
