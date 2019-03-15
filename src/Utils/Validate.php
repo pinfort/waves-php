@@ -5,9 +5,22 @@ namespace Pinfort\wavesPHP\Utils;
 use Pinfort\wavesPHP\Config\Config;
 use StephenHill\Base58;
 
+/**
+ * Class Validate
+ * @package Pinfort\wavesPHP\Utils
+ * @access public
+ * @author pinfort <ptg@nijitei.com>
+ * @category Utils
+ */
 class Validate
 {
-    public static function validateAddress($address)
+    /**
+     * Validate address is valid.
+     * @param string $address Address to validate.
+     * @return bool
+     * @throws \Exception Failed to validate.
+     */
+    public static function validateAddress(string $address): bool
     {
         $decodedAddr = (new Base58())->decode($address);
         if (substr($decodedAddr, 0, 1) != Config::get('address.ADDRESS_VERSION')) {
