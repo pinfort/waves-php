@@ -120,6 +120,6 @@ class Api implements ApiInterface
         if (strpos($path, '/') === 0) {
             $path = '/'.$path;
         }
-        return $host.'/'.$path;
+        return $host.$path;
     }
 }
