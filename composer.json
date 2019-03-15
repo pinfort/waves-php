@@ -29,5 +29,10 @@
         "psr-4": {
             "Pinfort\\wavesPHP\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pinfort\\wavesPHP\\Tests\\": "tests/"
+        }
     }
 }
