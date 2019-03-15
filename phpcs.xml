@@ -6,10 +6,8 @@
   </rule>
   <!-- 追加するルール -->
   <rule ref="PEAR.WhiteSpace.ObjectOperatorIndent"/>
-  <rule ref="Squiz.Commenting.FunctionComment" />
+  <rule ref="CakePHP.Commenting.FunctionComment" />
   <rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
-  <rule ref="Squiz.Commenting.ClassComment" />
-  <rule ref="Squiz.Commenting.FileComment" />
   <rule ref="Squiz.Commenting.VariableComment" />
   <!-- 除外するファイル・ディレクトリ -->
   <exclude-pattern>vendor/</exclude-pattern>
