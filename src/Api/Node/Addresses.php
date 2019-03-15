@@ -3,28 +3,61 @@
 namespace Pinfort\wavesPHP\Api\Node;
 
 use Pinfort\wavesPHP\Api\ApiBase;
+use InvalidArgumentException;
 
+/**
+ * kick Address APIs.
+ * @package Pinfort\wavesPHP\Api\Node
+ * @access public
+ * @author pinfort <ptg@nijitei.com>
+ * @category Api
+ */
 class Addresses extends ApiBase
 {
-    public function fetchAddresses(?int $fromIdx = null, ?int $toIdx = null)
+    /**
+     * Fetch addresses in node.
+     * @param int|null $fromIdx Slice addresses start index.
+     * @param int|null $toIdx Slice addresses end index.
+     * @throws InvalidArgumentException If either one of fromIndex or toIndex are not null, both are required.
+     * @return array
+     */
+    public function fetchAddresses(int $fromIdx = null, int $toIdx = null): array
     {
         if (!is_null($fromIdx) and !is_null($toIdx)) {
             return $this->api->get("/address/seq/$fromIdx/$toIdx");
         }
+        if (is_null($fromIdx) or is_null($toIdx)) {
+            throw new InvalidArgumentException('FromIndex and toIndex wants each other. must not be null.');
+        }
         return $this->api->get('/addresses');
     }
 
-    public function createAddress()
+    /**
+     * Create address in node.
+     * @return array
+     */
+    public function createAddress(): array
     {
         return $this->api->post('/addresses');
     }
 
-    public function verifySignatureByAddress(string $address, array $data)
+    /**
+     * Check a signature of a message signed by an account.
+     * @param string $address Address for verify.
+     * @param array $data Data for verify.
+     * @return array
+     */
+    public function verifySignatureByAddress(string $address, array $data): array
     {
         return $this->api->post("/addresses/verify/$address", $data);
     }
 
-    public function fetchAllDataByAddress(string $address)
+    /**
+     * Read all data posted by an account.
+     * @param string $address Address for fetch.
+     * @return array
+     */
+    public function fetchAllDataByAddress(string $address): array
     {
         return $this->api->post("/addresses/data/$address");
     }
