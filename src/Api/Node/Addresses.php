@@ -24,12 +24,12 @@ class Addresses extends ApiBase
     public function fetchAddresses(int $fromIdx = null, int $toIdx = null): array
     {
         if (!is_null($fromIdx) and !is_null($toIdx)) {
-            return $this->api->get("/address/seq/$fromIdx/$toIdx");
+            return $this->api->get("/addresses/seq/$fromIdx/$toIdx");
         }
-        if (is_null($fromIdx) or is_null($toIdx)) {
-            throw new InvalidArgumentException('FromIndex and toIndex wants each other. must not be null.');
+        if (is_null($fromIdx) and is_null($toIdx)) {
+            return $this->api->get('/addresses');
         }
-        return $this->api->get('/addresses');
+        throw new InvalidArgumentException('FromIndex and toIndex wants each other. must not be null.');
     }
 
     /**
