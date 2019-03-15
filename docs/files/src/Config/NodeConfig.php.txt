@@ -1,0 +1,37 @@
+<?php
+
+namespace Pinfort\wavesPHP\Config;
+
+/**
+ * Specialized class for configuration about node.
+ * @package Pinfort\wavesPHP\Config
+ * @access public
+ * @author pinfort <ptg@nijitei.com>
+ * @category Config
+ */
+class NodeConfig
+{
+    /**
+     * Set node config
+     *
+     * @param string $node Node host like http://example.domain.
+     * @param string $chain Chain name.
+     * @param string $chainId Chain id (1 character).
+     * @return void
+     */
+    public static function setNode(string $node, string $chain, string $chainId): void
+    {
+        Config::set('node.NODE', $node);
+        ChainConfig::setChain($chain, $chainId);
+    }
+
+    /**
+     * Get node host.
+     * @return string
+     */
+    public static function getNode(): string
+    {
+        return Config::get('node.NODE');
+    }
+}
+

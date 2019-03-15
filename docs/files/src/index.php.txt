@@ -1,0 +1,9 @@
+<?php
+
+require_once __DIR__.'\..\vendor\autoload.php';
+
+$str = 'test';
+$hashedA = hex2bin(blake2b($str, 32));
+echo bin2hex($hashedA).PHP_EOL;
+echo \kornrunner\Keccak::hash($hashedA, 256);
+
