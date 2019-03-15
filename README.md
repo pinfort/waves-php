@@ -1,4 +1,6 @@
 # WavesPHP
+[![Build Status](https://travis-ci.org/pinfort/waves-php.svg?branch=master)](https://travis-ci.org/pinfort/waves-php) [![Coverage Status](https://coveralls.io/repos/github/pinfort/waves-php/badge.svg?branch=master)](https://coveralls.io/github/pinfort/waves-php?branch=master)
+
 WavesPHP is API clients for Waves blockchain platform written in PHP.
 
 ## Installation
