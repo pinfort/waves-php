@@ -12,6 +12,7 @@ class AddressesTest extends TestCase
 
     public function testFetchAllDataByAddress()
     {
+        $this->markTestIncomplete();
     }
 
     public function testFetchAddresses()
@@ -29,11 +30,11 @@ class AddressesTest extends TestCase
 
     public function testCreateAddress()
     {
-
+        $this->markTestIncomplete();
     }
 
     public function testVerifySignatureByAddress()
     {
-
+        $this->markTestIncomplete();
     }
 }
