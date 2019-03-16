@@ -10,11 +10,19 @@ use Pinfort\wavesPHP\Tests\Http\Api;
 class AddressesTest extends TestCase
 {
 
+    /**
+     * Test FetchAllDataByAddress.
+     * @return void
+     */
     public function testFetchAllDataByAddress()
     {
         $this->markTestIncomplete();
     }
 
+    /**
+     * Test FetchAddresses.
+     * @return void
+     */
     public function testFetchAddresses()
     {
         $addresses = new Addresses(new Api());
@@ -28,11 +36,19 @@ class AddressesTest extends TestCase
         $addresses->fetchAddresses(1);
     }
 
+    /**
+     * Test CreateAddress.
+     * @return void
+     */
     public function testCreateAddress()
     {
         $this->markTestIncomplete();
     }
 
+    /**
+     * Test VerifySignatureByAddress.
+     * @return void
+     */
     public function testVerifySignatureByAddress()
     {
         $this->markTestIncomplete();
