@@ -5,4 +5,5 @@ return [
     'MAX_WDF_REQUEST' => 100,
     'THROW_EXCEPTION_ON_ERROR' => false,
     'ONLINE' => false,
+    'API_KEY' => '',
 ];

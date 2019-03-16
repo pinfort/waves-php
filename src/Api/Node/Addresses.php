@@ -42,17 +42,6 @@ class Addresses extends ApiBase
     }
 
     /**
-     * Check a signature of a message signed by an account.
-     * @param string $address Address for verify.
-     * @param array $data Data for verify.
-     * @return array
-     */
-    public function verifySignatureByAddress(string $address, array $data): array
-    {
-        return $this->api->post("/addresses/verify/$address", $data);
-    }
-
-    /**
      * Read all data posted by an account.
      * @param string $address Address for fetch.
      * @return array

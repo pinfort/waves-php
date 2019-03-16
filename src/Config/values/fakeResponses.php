@@ -12,6 +12,8 @@ return [
         '/addresses/data/3PM1fmuMNZPntnHQLBaC8bKpJXUjuEmCRx5' => [],
     ],
     'POST' => [
-
+        '/addresses' => [
+            "address"=> "3Mx2afTZ2KbRrLNbytyzTtXukZvqEB8SkW7"
+        ]
     ]
 ];

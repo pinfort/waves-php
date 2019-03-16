@@ -54,15 +54,8 @@ class AddressesTest extends TestCase
      */
     public function testCreateAddress()
     {
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * Test VerifySignatureByAddress.
-     * @return void
-     */
-    public function testVerifySignatureByAddress()
-    {
-        $this->markTestIncomplete();
+        $addresses = new Addresses(new Api());
+        $actual = $addresses->createAddress();
+        $this->assertEquals(Config::get('fakeResponses.POST')['/addresses'], $actual);
     }
 }
