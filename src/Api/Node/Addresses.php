@@ -48,6 +48,6 @@ class Addresses extends ApiBase
      */
     public function fetchAllDataByAddress(string $address): array
     {
-        return $this->api->post("/addresses/data/$address");
+        return $this->api->get("/addresses/data/$address");
     }
 }
