@@ -9,6 +9,7 @@ return [
             "3MzemqBzJ9h844PparHU1EzGC5SQmtH5pNp",
             "3Mstq4YsYUUGrZbXfxYVYKZtHusaVupiKkU"
         ],
+        '/addresses/data/3PM1fmuMNZPntnHQLBaC8bKpJXUjuEmCRx5' => [],
     ],
     'POST' => [
 

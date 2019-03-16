@@ -17,7 +17,9 @@ class AddressesTest extends TestCase
      */
     public function testFetchAllDataByAddress()
     {
-        $this->markTestIncomplete();
+        $addresses = new Addresses(new Api());
+        $actual = $addresses->fetchAllDataByAddress('3PM1fmuMNZPntnHQLBaC8bKpJXUjuEmCRx5');
+        $this->assertEquals(Config::get('fakeResponses.GET')['/addresses/data/3PM1fmuMNZPntnHQLBaC8bKpJXUjuEmCRx5'], $actual);
     }
 
     /**
