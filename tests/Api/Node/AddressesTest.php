@@ -15,7 +15,7 @@ class AddressesTest extends TestCase
      * Test FetchAllDataByAddress.
      * @return void
      */
-    public function testFetchAllDataByAddress()
+    public function testFetchAllDataByAddress(): void
     {
         $addresses = new Addresses(new Api());
         $actual = $addresses->fetchAllDataByAddress('3PM1fmuMNZPntnHQLBaC8bKpJXUjuEmCRx5');
@@ -26,7 +26,7 @@ class AddressesTest extends TestCase
      * Test FetchAddresses.
      * @return void
      */
-    public function testFetchAddresses()
+    public function testFetchAddresses(): void
     {
         $addresses = new Addresses(new Api());
         $actual = $addresses->fetchAddresses();
@@ -52,7 +52,7 @@ class AddressesTest extends TestCase
      * Test CreateAddress.
      * @return void
      */
-    public function testCreateAddress()
+    public function testCreateAddress(): void
     {
         $addresses = new Addresses(new Api());
         $actual = $addresses->createAddress();
