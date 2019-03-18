@@ -15,9 +15,9 @@ class Block extends ApiBase
 {
     /**
      * Fetch now height.
-     * @return array
+     * @return int
      */
-    public function fetchHeight(): array
+    public function fetchHeight(): int
     {
         return $this->api->get('/blocks/height')['height'];
     }
