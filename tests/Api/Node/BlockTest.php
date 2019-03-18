@@ -35,7 +35,7 @@ class BlockTest extends TestCase
     {
         $block = new Block(new Api());
         $actual = $block->fetchHeight();
-        $this->assertEquals($actual, Config::get('fekeResponses.GET')['/blocks/height']['height']);
+        $this->assertEquals($actual, Config::get('fakeResponses.GET')['/blocks/height']['height']);
     }
 
     /**
