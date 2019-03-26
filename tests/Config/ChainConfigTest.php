@@ -34,7 +34,7 @@ class ChainConfigTest extends TestCase
         Config::reset();
         ChainConfig::setChain('W');
         $this->assertEquals('mainnet', Config::get('chain.CHAIN'));
-        $this->assertEquals('W', Config::get('chain.CHAIN'));
+        $this->assertEquals('W', Config::get('chain.CHAIN_ID'));
 
         Config::reset();
         ChainConfig::setChain('hacknet');
