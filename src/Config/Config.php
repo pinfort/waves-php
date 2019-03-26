@@ -76,7 +76,7 @@ class Config
      */
     public static function reset(): void
     {
-        self::initialize();
+        self::$instance = null;
     }
 
     /**
