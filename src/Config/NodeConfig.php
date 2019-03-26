@@ -19,7 +19,7 @@ class NodeConfig
      * @param string $chainId Chain id (1 character).
      * @return void
      */
-    public static function setNode(string $node, string $chain, string $chainId): void
+    public static function setNode(string $node, string $chain, string $chainId = null): void
     {
         Config::set('node.NODE', $node);
         ChainConfig::setChain($chain, $chainId);
