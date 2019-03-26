@@ -71,6 +71,15 @@ class Config
     }
 
     /**
+     * reset all config
+     * @return void
+     */
+    public static function reset(): void
+    {
+        self::initialize();
+    }
+
+    /**
      * Get name of configuration files.
      * @return array
      */

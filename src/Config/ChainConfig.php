@@ -17,7 +17,7 @@ class ChainConfig
      * @param string $chainId Chain id (1 character).
      * @return void
      */
-    public static function setChain(string $chain, string $chainId): void
+    public static function setChain(string $chain, string $chainId = null): void
     {
         if (is_null($chainId)) {
             switch (mb_strtolower($chain)) {
