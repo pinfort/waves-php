@@ -393,6 +393,26 @@ return [
             ],
             "height" => 1442531,
         ],
+        '/transactions/info/4cKgLraZdiyXvdJxwgDtqpqHvAi7qWsZjg2rT2EHN4Xs' => [
+            "type" => 4,
+            "id" => "4cKgLraZdiyXvdJxwgDtqpqHvAi7qWsZjg2rT2EHN4Xs",
+            "sender" => "3PPKDQ3G67gekeobR8MENopXytEf6M8WXhs",
+            "senderPublicKey" => "ACrdghi6PDpLn158GQ7SNieaHeJEDiDCZmCPshTstUzx",
+            "fee" => 5000000,
+            "timestamp" => 1553571822061,
+            "signature" => "3DzphjYizwXTstMWv3JGGmY4tGXgHp3EvLm5AUZjoj1P8yhYzGihNj8PKXn7Mf7B1qbPJzfk2o81Eoxg6UCq7rzk",
+            "proofs" => [
+                "3DzphjYizwXTstMWv3JGGmY4tGXgHp3EvLm5AUZjoj1P8yhYzGihNj8PKXn7Mf7B1qbPJzfk2o81Eoxg6UCq7rzk",
+            ],
+            "version" => 1,
+            "recipient" => "3PQ6wCS3zAkDEJtvGntQZbjuLw24kxTqndr",
+            "assetId" => "HzfaJp8YQWLvQG4FkUxq2Q7iYWMYQ2k8UF89vVJAjWPj",
+            "feeAssetId" => "HzfaJp8YQWLvQG4FkUxq2Q7iYWMYQ2k8UF89vVJAjWPj",
+            "feeAsset" => "HzfaJp8YQWLvQG4FkUxq2Q7iYWMYQ2k8UF89vVJAjWPj",
+            "amount" => 1,
+            "attachment" => "W6KmfC81cwCe2dPhNP2eu8VJoVK2c91xkuEcFqzBrtwXgGvi7YxYmxtWCnVoZYNzwa2KwqJLN56oWh1icRB2HYNRzRP4pP",
+            "height" => 1454033,
+        ]
     ],
     'POST' => [
         '/addresses' => [
