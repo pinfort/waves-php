@@ -2,7 +2,7 @@
 
 namespace Pinfort\wavesPHP\Utils;
 
-use Kornrunner\Keccak;
+use kornrunner\Keccak;
 
 /**
  * Class Crypto
