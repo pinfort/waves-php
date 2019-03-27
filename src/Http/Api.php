@@ -57,7 +57,7 @@ class Api implements ApiInterface
 
         $res = $this->httpClient->get(self::buildUrl($host, $path), ['headers' => $headers]);
 
-        return json_decode($res->getBody());
+        return json_decode($res->getBody(), true);
     }
 
     /**
@@ -85,7 +85,7 @@ class Api implements ApiInterface
             $res = $this->httpClient->post(self::buildUrl($host, $path), ['form_params' => $postData, 'headers' => array_merge(['content-type' => 'application/json'], $headers)]);
         }
 
-        return json_decode($res->getBody());
+        return json_decode($res->getBody(), true);
     }
 
     /**
@@ -117,7 +117,7 @@ class Api implements ApiInterface
      */
     private static function buildUrl(string $host, string $path): string
     {
-        if (strpos($path, '/') === 0) {
+        if (strpos($path, '/') !== 0) {
             $path = '/'.$path;
         }
         return $host.$path;
