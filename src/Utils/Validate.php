@@ -23,7 +23,7 @@ class Validate
     public static function validateAddress(string $address): bool
     {
         $decodedAddr = (new Base58())->decode($address);
-        if (substr($decodedAddr, 0, 1) != Config::get('address.ADDRESS_VERSION')) {
+        if (substr($decodedAddr, 0, 1) != chr(Config::get('address.ADDRESS_VERSION'))) {
             // Wrong address version
             return false;
         }
