@@ -49,7 +49,7 @@ class Api implements ApiInterface
     {
         $isOnline = Config::get('general.ONLINE');
         if (!$isOnline) {
-            return self::makeOfflineTx($path);
+            return self::makeOfflineTxGet($path);
         }
         if (is_null($host)) {
             $host = NodeConfig::getNode();
@@ -73,7 +73,7 @@ class Api implements ApiInterface
     {
         $isOnline = Config::get('general.ONLINE');
         if (!$isOnline) {
-            return self::makeOfflineTx($path, $postData);
+            return self::makeOfflineTxPost($path, $postData);
         }
         if (is_null($host)) {
             $host = NodeConfig::getNode();
@@ -82,7 +82,7 @@ class Api implements ApiInterface
         if (is_null($postData)) {
             $res = $this->httpClient->post(self::buildUrl($host, $path), ['headers' => array_merge(['content-type' => 'application/json'], $headers)]);
         } else {
-            $res = $this->httpClient->post(self::buildUrl($host, $path), ['form_params' => $postData, 'headers' => array_merge(['content-type' => 'application/json'], $headers)]);
+            $res = $this->httpClient->post(self::buildUrl($host, $path), ['form_params' => $postData, 'headers' => array_merge(['content-type' => 'application/x-www-form-urlencoded'], $headers)]);
         }
 
         return json_decode($res->getBody(), true);
@@ -92,17 +92,29 @@ class Api implements ApiInterface
      * Make offlineTx Array. It includes ['api-type'], ['api-endpoint'], ['api-data']
      *
      * @param string $path Path to access. It must be start with slash.
+     * @return array
+     */
+    private static function makeOfflineTxGet(string $path): array
+    {
+        $offlineTx = [];
+        $offlineTx['api-type'] = 'GET';
+        $offlineTx['api-endpoint'] = $path;
+        $offlineTx['api-data'] = null;
+
+        return $offlineTx;
+    }
+
+    /**
+     * Make offlineTx Array. It includes ['api-type'], ['api-endpoint'], ['api-data']
+     *
+     * @param string $path Path to access. It must be start with slash.
      * @param array|null $postData Input Data to post. Key-value style.
      * @return array
      */
-    private static function makeOfflineTx(string $path, ?array $postData = null): array
+    private static function makeOfflineTxPost(string $path, ?array $postData = null): array
     {
         $offlineTx = [];
-        if (!is_null($postData)) {
-            $offlineTx['api-type'] = 'POST';
-        } else {
-            $offlineTx['api-type'] = 'GET';
-        }
+        $offlineTx['api-type'] = 'POST';
         $offlineTx['api-endpoint'] = $path;
         $offlineTx['api-data'] = $postData;
 
