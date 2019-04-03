@@ -18,7 +18,7 @@ class SingletonTest extends TestCase
         try {
             $i = new SingletonUsingClass();
         } catch(\Error $e) {
-            $this->assertEquals('Call to private Pinfort\wavesPHP\Tests\Config\Traits\SingletonUsedClass::__construct() from context \'Pinfort\wavesPHP\Tests\Config\Traits\SingletonTest\'', $e->getMessage());
+            $this->assertEquals('Call to private Pinfort\wavesPHP\Tests\Config\Traits\SingletonUsingClass::__construct() from context \'Pinfort\wavesPHP\Tests\Config\Traits\SingletonTest\'', $e->getMessage());
         }
     }
 
