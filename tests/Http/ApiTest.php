@@ -97,5 +97,15 @@ class ApiTest extends TestCase
         $this->assertEquals([ "name" => "John", "age" => 30, "car" => null ], $res);
 
         Config::reset();
+
+        // OFFLINE
+        Config::set('general.ONLINE', false);
+        $api = new Api();
+        $res = $api->get('example.json');
+        $this->assertEquals('GET', $res['api-type']);
+        $this->assertEquals('example.json', $res['api-endpoint']);
+        $this->assertEquals(null, $res['api-data']);
+
+        Config::reset();
     }
 }
