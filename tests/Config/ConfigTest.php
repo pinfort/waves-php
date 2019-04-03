@@ -18,9 +18,6 @@ class ConfigTest extends TestCase
     {
         Config::reset();
         $config = Config::getAll();
-        $this->assertEquals([
-            'CHAIN' => 'mainnet',
-            'CHAIN_ID' => 'W',
-        ], $config['chain']);
+        $this->assertEquals('mainnet', $config['chain.CHAIN']);
     }
 }
