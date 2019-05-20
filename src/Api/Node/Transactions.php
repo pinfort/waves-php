@@ -5,7 +5,7 @@ namespace Pinfort\wavesPHP\Api\Node;
 use Pinfort\wavesPHP\Api\ApiBase;
 
 /**
- * Kick transaction APIs.
+ * Kick transactions APIs.
  * @package Pinfort\wavesPHP\Api\Node
  * @access public
  * @author pinfort <ptg@nijitei.com>
