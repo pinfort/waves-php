@@ -8,12 +8,12 @@
 
 namespace Pinfort\wavesPHP\Tests\Api\Node;
 
-use Pinfort\wavesPHP\Api\Node\Transaction;
+use Pinfort\wavesPHP\Api\Node\Transactions;
 use PHPUnit\Framework\TestCase;
 use Pinfort\wavesPHP\Config\Config;
 use Pinfort\wavesPHP\Tests\Http\Api;
 
-class TransactionTest extends TestCase
+class TransactionsTest extends TestCase
 {
 
     /**
@@ -22,7 +22,7 @@ class TransactionTest extends TestCase
      */
     public function testFetchById(): void
     {
-        $transaction = new Transaction(new Api());
+        $transaction = new Transactions(new Api());
         $actual = $transaction->fetchById('4cKgLraZdiyXvdJxwgDtqpqHvAi7qWsZjg2rT2EHN4Xs');
         $this->assertEquals($actual, Config::get('fakeResponses.GET')['/transactions/info/4cKgLraZdiyXvdJxwgDtqpqHvAi7qWsZjg2rT2EHN4Xs']);
     }

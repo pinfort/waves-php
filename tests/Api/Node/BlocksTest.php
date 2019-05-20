@@ -8,12 +8,12 @@
 
 namespace Pinfort\wavesPHP\Tests\Api\Node;
 
-use Pinfort\wavesPHP\Api\Node\Block;
+use Pinfort\wavesPHP\Api\Node\Blocks;
 use PHPUnit\Framework\TestCase;
 use Pinfort\wavesPHP\Config\Config;
 use Pinfort\wavesPHP\Tests\Http\Api;
 
-class BlockTest extends TestCase
+class BlocksTest extends TestCase
 {
 
     /**
@@ -22,7 +22,7 @@ class BlockTest extends TestCase
      */
     public function testFetchLastBlock(): void
     {
-        $block = new Block(new Api());
+        $block = new Blocks(new Api());
         $actual = $block->fetchLastBlock();
         $this->assertEquals($actual, Config::get('fakeResponses.GET')['/blocks/last']);
     }
@@ -33,7 +33,7 @@ class BlockTest extends TestCase
      */
     public function testFetchHeight(): void
     {
-        $block = new Block(new Api());
+        $block = new Blocks(new Api());
         $actual = $block->fetchHeight();
         $this->assertEquals($actual, Config::get('fakeResponses.GET')['/blocks/height']['height']);
     }
@@ -44,7 +44,7 @@ class BlockTest extends TestCase
      */
     public function testFetchByHeight(): void
     {
-        $block = new Block(new Api());
+        $block = new Blocks(new Api());
         $actual = $block->fetchByHeight(1442531);
         $this->assertEquals($actual, Config::get('fakeResponses.GET')['/blocks/at/1442531']);
     }
