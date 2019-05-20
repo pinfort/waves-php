@@ -11,7 +11,7 @@ use Pinfort\wavesPHP\Api\ApiBase;
  * @author pinfort <ptg@nijitei.com>
  * @category Api
  */
-class Transaction extends ApiBase
+class Transactions extends ApiBase
 {
     /**
      * Fetch transaction data from API by id.

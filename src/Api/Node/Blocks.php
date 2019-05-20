@@ -5,13 +5,13 @@ namespace Pinfort\wavesPHP\Api\Node;
 use Pinfort\wavesPHP\Api\ApiBase;
 
 /**
- * Kick block APIs.
+ * Kick blocks APIs.
  * @package Pinfort\wavesPHP\Api\Node
  * @access public
  * @author pinfort <ptg@nijitei.com>
  * @category Api
  */
-class Block extends ApiBase
+class Blocks extends ApiBase
 {
     /**
      * Fetch now height.
