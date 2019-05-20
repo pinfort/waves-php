@@ -152,7 +152,7 @@ class Address
      * @return $this
      * @throws \Exception Failed make instance.
      */
-    private function generate(?string $publicKey = '', ?string $privateKey = '', ?string $seed = '', ?int $nonce = 0)
+    private function generate(?string $publicKey = '', ?string $privateKey = '', ?string $seed = '', ?int $nonce = 0): self
     {
         $this->seed = $seed;
         $this->nonce = $nonce;
