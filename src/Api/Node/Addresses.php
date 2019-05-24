@@ -50,4 +50,18 @@ class Addresses extends ApiBase
     {
         return $this->api->get("/addresses/data/$address");
     }
+
+    /**
+     * @param string $address Address for check balance.
+     * @param int $confirmations Confirmation count for check balance
+     * @return int
+     */
+    public function fetchAccountsBalance(string $address, int $confirmations = 0): int
+    {
+        if ($confirmations === 0) {
+            return $this->api->get("/addresses/balance/$address")['balance'];
+        } else {
+            return $this->api->get("/addresses/balance/$address/$confirmations")['balance'];
+        }
+    }
 }
