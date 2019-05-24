@@ -130,9 +130,6 @@ class Address
      */
     public static function getAddressByPrivateKey(string $privateKey): self
     {
-        $seed = '';
-        $nonce = 0;
-
         if (empty($privateKey)) {
             throw new \InvalidArgumentException('Private key must not be empty.');
         }
