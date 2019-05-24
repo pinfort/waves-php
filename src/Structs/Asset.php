@@ -47,7 +47,7 @@ class Asset
     /**
      * @var boolean The asset can be issued additionally?
      */
-    public $reIssuable = false;
+    public $reissuable = false;
 
     /**
      * @var null|Transactions Transaction API instance
@@ -84,7 +84,7 @@ class Asset
                     $this->issuer = $req['sender'];
                     $this->quantity = $req['quantity'];
                     $this->decimals = $req['decimals'];
-                    $this->reIssuable = $req['reissuable'];
+                    $this->reissuable = $req['reissuable'];
                     $this->name = $req['name'];
                     $this->description = $req['description'];
                     return 'Issued';
@@ -94,5 +94,33 @@ class Asset
             }
         }
         return null;
+    }
+
+    /**
+     * Check asset is smart asset or not
+     * @return bool Is the asset smart asset?
+     */
+    public function isSmart(): bool
+    {
+        $req = $this->transactionAPI->fetchById($this->assetId);
+        if (array_key_exists('script', $req) and $req['script']) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return string info of asset
+     */
+    public function __toString(): string
+    {
+        return 'status = '.$this->status().PHP_EOL
+            .'assetId = '.$this->assetId.PHP_EOL
+            .'issuer = '.$this->issuer.PHP_EOL
+            .'name = '.$this->name.PHP_EOL
+            .'description = '.$this->description.PHP_EOL
+            .'quantity = '.$this->quantity.PHP_EOL
+            .'decimals = '.$this->decimals.PHP_EOL
+            .'reissuable = '.$this->reissuable.PHP_EOL;
     }
 }
