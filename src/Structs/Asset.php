@@ -4,6 +4,7 @@
 namespace Pinfort\wavesPHP\Structs;
 
 use Pinfort\wavesPHP\Api\Node\Transactions;
+use Pinfort\wavesPHP\Config\Config;
 
 /**
  * Asset struct.
@@ -80,7 +81,7 @@ class Asset
         if ($this->assetId) {
             try {
                 $req = $this->transactionAPI->fetchById($this->assetId);
-                if ($req['type'] === 3) {
+                if ($req['type'] === Config::get('transactionTypes.ISSUE')) {
                     $this->issuer = $req['sender'];
                     $this->quantity = $req['quantity'];
                     $this->decimals = $req['decimals'];
