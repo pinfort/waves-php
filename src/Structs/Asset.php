@@ -3,6 +3,8 @@
 
 namespace Pinfort\wavesPHP\Structs;
 
+use Pinfort\wavesPHP\Api\Node\Transactions;
+
 /**
  * Asset struct.
  * @package Pinfort\wavesPHP\Structs
@@ -48,6 +50,11 @@ class Asset
     public $reIssuable = false;
 
     /**
+     * @var null|Transactions Transaction API instance
+     */
+    private $transactionAPI = null;
+
+    /**
      * Asset constructor.
      * @param string $assetId Id of asset.
      */
@@ -59,7 +66,33 @@ class Asset
             $this->quantity = 100000000 * (10 ** 8);
             $this->decimals = 8;
         } else {
-            // TODO: write status function
+            $this->status();
         }
+        $this->transactionAPI = new Transactions();
+    }
+
+    /**
+     * Init Asset info
+     * @return string|null The Asset is Issued or not
+     */
+    public function status(): ?string
+    {
+        if ($this->assetId) {
+            try {
+                $req = $this->transactionAPI->fetchById($this->assetId);
+                if ($req['type'] === 3) {
+                    $this->issuer = $req['sender'];
+                    $this->quantity = $req['quantity'];
+                    $this->decimals = $req['decimals'];
+                    $this->reIssuable = $req['reissuable'];
+                    $this->name = $req['name'];
+                    $this->description = $req['description'];
+                    return 'Issued';
+                }
+            } catch (\Exception $e) {
+                // Do nothing
+            }
+        }
+        return null;
     }
 }
