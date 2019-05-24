@@ -233,6 +233,9 @@ class Address
         return (new Base58())->encode($unHashedAddress.$addressHash);
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         if ($this->address) {
