@@ -69,7 +69,7 @@ class Address
      * Get address struct by Base58 encoded address.
      * @param string $address Base58 encoded address.
      * @return Address
-     * @throws \InvalidArgumentException Failed validate address.
+     * @throws \InvalidArgumentException Invalid address.
      * @throws \Exception Failed make instance.
      */
     public static function getAddressByAddress(string $address): self
@@ -77,9 +77,7 @@ class Address
         if (!Validate::validateAddress($address)) {
             throw new \InvalidArgumentException('Invalid address');
         }
-        $obj = new self();
-        $obj->address = $address;
-        return $obj;
+        return (new self())->generate($address);
     }
 
     /**
@@ -95,7 +93,15 @@ class Address
         if ($nonce < 0 or $nonce > 4294967295) {
             throw new \InvalidArgumentException('Nonce must be between 0 and 4294967295');
         }
-        return (new self())->generate(null, null, $seed, $nonce);
+
+        $privKey = self::generatePrivateKeyFromSeedAndNonce($seed, $nonce);
+        $pubKey = curve25519_public($privKey);
+
+        $publicKey = (new Base58())->encode($pubKey);
+        $privateKey = (new Base58())->encode($privKey);
+        $address = self::generateAddressFromDecodedPublicKey($pubKey);
+
+        return (new self())->generate($address, $publicKey, $privateKey, $seed, $nonce);
     }
 
     /**
@@ -104,20 +110,49 @@ class Address
      * @return Address
      * @throws \Exception Failed make instance.
      */
-    public static function getAddressByPublickey(string $publicKey): self
+    public static function getAddressByPublicKey(string $publicKey): self
     {
-        return (new self())->generate($publicKey);
+        $pubKey = (new Base58())->decode($publicKey);
+
+        $address = self::generateAddressFromDecodedPublicKey($pubKey);
+
+        return (new self())->generate($address, $publicKey);
     }
 
     /**
      * Get address struct by private key of address.
-     * @param string $privateKey Private key of address.
+     * @param string $privateKey Base58 encoded Private key of address.
      * @return Address
-     * @throws \Exception Failed make instance.
+     * @throws \Exception Failed generate address.
+     * @throws \InvalidArgumentException Empty private key.
      */
     public static function getAddressByPrivateKey(string $privateKey): self
     {
-        return (new self())->generate(null, $privateKey);
+        $seed = '';
+        $nonce = 0;
+
+        if (empty($privateKey)) {
+            throw new \InvalidArgumentException('Private key must not be empty.');
+        }
+        $privKey = (new Base58())->decode($privateKey);
+        $pubKey = curve25519_public($privKey);
+
+        $publicKey = (new Base58())->encode($pubKey);
+        $address = self::generateAddressFromDecodedPublicKey($pubKey);
+
+        return (new self())->generate($address, $publicKey, $privateKey);
+    }
+
+    /**
+     * @param int $nonce Nonce for generate Address.
+     * @return Address
+     * @throws \Exception Failed to generate Address.
+     */
+    public static function getAddressByRandom(int $nonce = 0): self
+    {
+        $seed = self::generateRandomSeed();
+
+        return self::getAddressBySeed($seed, $nonce);
     }
 
     /**
@@ -132,69 +167,70 @@ class Address
         return (new self())->generate();
     }
 
-    /**
-     * Get address struct by nonce of address.
-     * @param int $nonce Nonce of address.
-     * @return Address
-     * @throws \Exception Failed make instance.
-     */
-    public static function getAddressByNonce(int $nonce): self
-    {
-        return (new self())->generate(null, null, null, $nonce);
-    }
 
     /**
      * Generate struct by some data.
-     * @param string $publicKey Public key of address.
-     * @param string $privateKey Private key of address.
-     * @param string $seed Seed of address.
-     * @param int $nonce Nonce of address.
-     * @return $this
-     * @throws \Exception Failed make instance.
+     * @param string|null $address Base58 encoded address of address.
+     * @param string|null $publicKey Base58 encoded public key of address.
+     * @param string|null $privateKey Base58 encoded private key of address.
+     * @param string|null $seed Seed of address.
+     * @param int|null $nonce Nonce of Address.
+     * @return Address
      */
-    private function generate(?string $publicKey = '', ?string $privateKey = '', ?string $seed = '', ?int $nonce = 0): self
+    private function generate(?string $address = null, ?string $publicKey = null, ?string $privateKey = null, ?string $seed = null, ?int $nonce = null): self
     {
-        $this->seed = $seed;
-        $this->nonce = $nonce;
-
-        if (empty($publicKey) and empty($privateKey) and empty($seed)) {
-            $wordCount = 2048;
-            $words = [];
-            $wordList = Config::get('address.WORD_LIST');
-            for ($count = 0; $count < 5; $count++) {
-                $seedNumber = hexdec(bin2hex(random_bytes(4)));
-                $word1 = $seedNumber % $wordCount;
-                $word2 = (floor($seedNumber / $wordCount) >> 0 + $word1) % $wordCount;
-                $word3 = ((floor((floor($seedNumber / $wordCount) >> 0) / $wordCount) >> 0) + $word2) % $wordCount;
-                $words[] = $wordList[$word1];
-                $words[] = $wordList[$word2];
-                $words[] = $wordList[$word3];
-            }
-            $this->seed = implode(' ', $words);
-        }
-
-        if (!empty($publicKey)) {
-            $pubKey = $this->base58->decode($publicKey);
-            $privKey = '';
-        } else {
-            $seedHash = Crypto::hashChain(pack('N', $nonce).$seed);
-            $accountSeedHash = hash('sha256', $seedHash);
-            if (empty($privateKey)) {
-                $privKey = curve25519_private(hex2bin($accountSeedHash));
-            } else {
-                $privKey = $this->base58->decode($privateKey);
-            }
-            $pubKey = curve25519_public($privKey);
-        }
-        $unHashedAddress = chr(1).Config::get('chain.CHAIN_ID').substr(Crypto::hashChain($pubKey), 0, 20);
-        $addressHash = substr(Crypto::hashChain($unHashedAddress), 0, 4);
-        $this->address = $this->base58->encode($unHashedAddress.$addressHash);
-        $this->publicKey = $this->base58->encode($pubKey);
-        if (!empty($privKey)) {
-            $this->privateKey = $this->base58->encode($privKey);
-        }
+        $this->publicKey = $publicKey ?: '';
+        $this->privateKey = $privateKey ?: '';
+        $this->seed = $seed ?: '';
+        $this->nonce = $nonce ?: 0;
+        $this->address = $address ?: '';
 
         return $this;
     }
 
+    /**
+     * @return string Generated seed.
+     * @throws \Exception Can not generate random bytes.
+     */
+    private static function generateRandomSeed(): string
+    {
+        $wordCount = 2048;
+        $words = [];
+        $wordList = Config::get('address.WORD_LIST');
+        for ($count = 0; $count < 5; $count++) {
+            $seedNumber = hexdec(bin2hex(random_bytes(4)));
+            $word1 = $seedNumber % $wordCount;
+            $word2 = (floor($seedNumber / $wordCount) >> 0 + $word1) % $wordCount;
+            $word3 = ((floor((floor($seedNumber / $wordCount) >> 0) / $wordCount) >> 0) + $word2) % $wordCount;
+            $words[] = $wordList[$word1];
+            $words[] = $wordList[$word2];
+            $words[] = $wordList[$word3];
+        }
+        return implode(' ', $words);
+    }
+
+    /**
+     * @param string $seed Seed.
+     * @param int $nonce Nonce.
+     * @return string
+     * @throws \Exception Failed generate private key.
+     */
+    private static function generatePrivateKeyFromSeedAndNonce(string $seed, int $nonce): string
+    {
+        $seedHash = Crypto::hashChain(pack('N', $nonce).$seed);
+        $accountSeedHash = hash('sha256', $seedHash);
+        return curve25519_private(hex2bin($accountSeedHash));
+    }
+
+    /**
+     * @param string $DecodedPublicKey Base58 decoded public key.
+     * @return string
+     * @throws \Exception Failed to make hash.
+     */
+    private static function generateAddressFromDecodedPublicKey(string $DecodedPublicKey): string
+    {
+        $unHashedAddress = chr(1).Config::get('chain.CHAIN_ID').substr(Crypto::hashChain($DecodedPublicKey), 0, 20);
+        $addressHash = substr(Crypto::hashChain($unHashedAddress), 0, 4);
+        return (new Base58())->encode($unHashedAddress.$addressHash);
+    }
 }
