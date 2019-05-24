@@ -2,6 +2,8 @@
 
 namespace Pinfort\wavesPHP\Structs;
 
+use Pinfort\wavesPHP\Api\Node\Addresses;
+use Pinfort\wavesPHP\Api\Node\Assets;
 use Pinfort\wavesPHP\Config\Config;
 use Pinfort\wavesPHP\Utils\Validate;
 use StephenHill\Base58;
@@ -232,5 +234,30 @@ class Address
         $unHashedAddress = chr(1).Config::get('chain.CHAIN_ID').substr(Crypto::hashChain($DecodedPublicKey), 0, 20);
         $addressHash = substr(Crypto::hashChain($unHashedAddress), 0, 4);
         return (new Base58())->encode($unHashedAddress.$addressHash);
+    }
+
+    public function __toString(): string
+    {
+        if ($this->address) {
+            $balances_str_list = [];
+            try {
+                $balances = (new Assets())->fetchBalancesByAddress($this->address);
+                foreach ($balances as $balance) {
+                    if ($balance['balance'] > 0) {
+                        $balances_str_list[] = '  '.$balance['assetId'].' ('.$balance['issueTransaction']['name'].') = '.$balance['balance'];
+                    }
+                }
+            } catch (\Exception $e) {
+                // Do nothing
+            }
+            $waves_balance = (new Addresses())->fetchAccountsBalance($this->address);
+            return 'address = '.$this->address.PHP_EOL
+                .'publicKey = '.$this->publicKey.PHP_EOL
+                .'privateKey = '.$this->privateKey.PHP_EOL
+                .'seed = '.$this->seed.PHP_EOL
+                .'nonce = '.$this->nonce.PHP_EOL
+                .'  Waves = '.$waves_balance.PHP_EOL
+                .implode(PHP_EOL, $balances_str_list);
+        }
     }
 }
