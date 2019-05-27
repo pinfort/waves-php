@@ -68,4 +68,25 @@ class Block
      * @var array Raw block data.
      */
     public $raw = [];
+
+    /**
+     * Block constructor.
+     * @param array $block Raw block data(from API).
+     */
+    public function __construct(array $block)
+    {
+        $this->raw = $block;
+
+        $this->version = $block['version'];
+        $this->timestamp = $block['timestamp'];
+        $this->reference = $block['reference'];
+        $this->nxtConsensus = $block['nxt-consensus'];
+        $this->generator = $block['generator'];
+        $this->signature = $block['signature'];
+        $this->blockSize = $block['blocksize'];
+        $this->transactionCount = $block['transactionCount'];
+        $this->fee = $block['fee'];
+        $this->transactions = $block['transactions'];
+        $this->height = $block['height'];
+    }
 }
