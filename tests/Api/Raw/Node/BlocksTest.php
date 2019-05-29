@@ -6,9 +6,9 @@
  * Time: 14:38
  */
 
-namespace Pinfort\wavesPHP\Tests\Api\Node;
+namespace Pinfort\wavesPHP\Tests\Api\Raw\Node;
 
-use Pinfort\wavesPHP\Api\Node\Blocks;
+use Pinfort\wavesPHP\Api\Raw\Node\Blocks;
 use PHPUnit\Framework\TestCase;
 use Pinfort\wavesPHP\Config\Config;
 use Pinfort\wavesPHP\Tests\Http\Api;

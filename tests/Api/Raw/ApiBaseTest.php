@@ -6,11 +6,11 @@
  * Time: 14:30
  */
 
-namespace Pinfort\wavesPHP\Tests\Api;
+namespace Pinfort\wavesPHP\Tests\Api\Raw;
 
-use Pinfort\wavesPHP\Api\ApiBase;
+use Pinfort\wavesPHP\Api\Raw\ApiBase;
 use PHPUnit\Framework\TestCase;
-use Pinfort\wavesPHP\Api\Node\Addresses;
+use Pinfort\wavesPHP\Api\Raw\Node\Addresses;
 use Pinfort\wavesPHP\Config\Config;
 
 class ApiBaseTest extends TestCase

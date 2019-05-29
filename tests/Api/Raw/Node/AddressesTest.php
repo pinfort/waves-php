@@ -1,9 +1,9 @@
 <?php
 
-namespace Pinfort\wavesPHP\Tests\Api\Node;
+namespace Pinfort\wavesPHP\Tests\Api\Raw\Node;
 
 use PHPUnit\Framework\TestCase;
-use Pinfort\wavesPHP\Api\Node\Addresses;
+use Pinfort\wavesPHP\Api\Raw\Node\Addresses;
 use Pinfort\wavesPHP\Config\Config;
 use Pinfort\wavesPHP\Tests\Http\Api;
 use InvalidArgumentException;

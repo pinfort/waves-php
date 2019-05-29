@@ -2,8 +2,8 @@
 
 namespace Pinfort\wavesPHP\Structs;
 
-use Pinfort\wavesPHP\Api\Node\Addresses;
-use Pinfort\wavesPHP\Api\Node\Assets;
+use Pinfort\wavesPHP\Api\Raw\Node\Addresses;
+use Pinfort\wavesPHP\Api\Raw\Node\Assets;
 use Pinfort\wavesPHP\Config\Config;
 use Pinfort\wavesPHP\Utils\Validate;
 use StephenHill\Base58;

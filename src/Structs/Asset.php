@@ -3,7 +3,7 @@
 
 namespace Pinfort\wavesPHP\Structs;
 
-use Pinfort\wavesPHP\Api\Node\Transactions;
+use Pinfort\wavesPHP\Api\Raw\Node\Transactions;
 use Pinfort\wavesPHP\Config\Config;
 
 /**

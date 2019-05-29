@@ -1,13 +1,13 @@
 <?php
 
-namespace Pinfort\wavesPHP\Api;
+namespace Pinfort\wavesPHP\Api\Raw;
 
 use Pinfort\wavesPHP\Http\Api;
 use Pinfort\wavesPHP\Http\ApiInterface;
 
 /**
  * Api base class
- * @package Pinfort\wavesPHP\Api
+ * @package Pinfort\wavesPHP\Api\Raw
  * @access protected
  * @author pinfort <ptg@nijitei.com>
  * @category Api

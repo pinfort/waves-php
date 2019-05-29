@@ -6,14 +6,14 @@
  * Time: 0:21
  */
 
-namespace Pinfort\wavesPHP\Api\Node;
+namespace Pinfort\wavesPHP\Api\Raw\Node;
 
 
-use Pinfort\wavesPHP\Api\ApiBase;
+use Pinfort\wavesPHP\Api\Raw\ApiBase;
 
 /**
  * Kick assets APIs.
- * @package Pinfort\wavesPHP\Api\Node
+ * @package Pinfort\wavesPHP\Api\Raw\Node
  * @access public
  * @author pinfort <ptg@nijitei.com>
  * @category Api
