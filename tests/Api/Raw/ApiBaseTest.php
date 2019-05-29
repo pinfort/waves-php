@@ -8,7 +8,6 @@
 
 namespace Pinfort\wavesPHP\Tests\Api\Raw;
 
-use Pinfort\wavesPHP\Api\Raw\ApiBase;
 use PHPUnit\Framework\TestCase;
 use Pinfort\wavesPHP\Api\Raw\Node\Addresses;
 use Pinfort\wavesPHP\Config\Config;
