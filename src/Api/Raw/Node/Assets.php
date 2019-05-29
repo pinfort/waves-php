@@ -8,7 +8,6 @@
 
 namespace Pinfort\wavesPHP\Api\Raw\Node;
 
-
 use Pinfort\wavesPHP\Api\Raw\ApiBase;
 
 /**
