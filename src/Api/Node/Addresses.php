@@ -53,7 +53,7 @@ class Addresses extends ApiBase
 
     /**
      * @param string $address Address for check balance.
-     * @param int $confirmations Confirmation count for check balance
+     * @param int $confirmations Confirmation count for check balance.
      * @return int
      */
     public function fetchAccountsBalance(string $address, int $confirmations = 0): int
