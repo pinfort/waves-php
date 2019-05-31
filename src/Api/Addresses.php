@@ -10,6 +10,7 @@ namespace Pinfort\wavesPHP\Api;
 
 use Pinfort\wavesPHP\Api\Raw\Node\Addresses as RawAddresses;
 use Pinfort\wavesPHP\Http\ApiInterface;
+use Pinfort\wavesPHP\Structs\Address;
 
 /**
  * Class Addresses
@@ -30,5 +31,22 @@ class Addresses
     public function __construct(ApiInterface $api = null)
     {
         $this->api = (new RawAddresses($api));
+    }
+
+    /**
+     * @param int|null $fromIdx The start of index for address to fetch.
+     * @param int|null $toIdx The end of index for address to fetch.
+     * @return array List of object 'Address'.
+     * @throws \InvalidArgumentException If either one of fromIndex or toIndex are not null, both are required.
+     * @throws  \Exception Failed make instance of Base58.
+     */
+    public function fetchAddresses(int $fromIdx = null, int $toIdx = null): array
+    {
+        $struct_addresses = [];
+        $response = $this->api->fetchAddresses($fromIdx, $toIdx);
+        foreach ($response as $txt_address) {
+            $struct_addresses[] = Address::getAddressByAddress($txt_address);
+        }
+        return $struct_addresses;
     }
 }
