@@ -6,7 +6,7 @@
  * Time: 20:41
  */
 
-namespace Pinfort\wavesPHP\Api;
+namespace Pinfort\wavesPHP\Api\Node;
 
 use Pinfort\wavesPHP\Api\Raw\Node\Addresses as RawAddresses;
 use Pinfort\wavesPHP\Http\ApiInterface;
