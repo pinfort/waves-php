@@ -59,4 +59,14 @@ class Addresses
         $response = $this->api->createAddress();
         return Address::getAddressByAddress($response['address']);
     }
+
+    /**
+     * @param Address $address Address for check.
+     * @param int $confirmations Check balance only over x confirmations.
+     * @return int balance
+     */
+    public function fetchAccountBalance(Address $address, int $confirmations = 0): int
+    {
+        return $this->api->fetchAccountBalance($address->address, $confirmations);
+    }
 }
