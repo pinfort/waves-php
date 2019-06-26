@@ -49,4 +49,14 @@ class Addresses
         }
         return $structAddresses;
     }
+
+    /**
+     * @return Address Created address.
+     * @throws \Exception Failed make instance of Base58.
+     */
+    public function createAddress(): Address
+    {
+        $response = $this->api->createAddress();
+        return Address::getAddressByAddress($response['address']);
+    }
 }
