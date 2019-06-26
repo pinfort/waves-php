@@ -56,7 +56,7 @@ class Addresses extends ApiBase
      * @param int $confirmations Confirmation count for check balance.
      * @return int
      */
-    public function fetchAccountsBalance(string $address, int $confirmations = 0): int
+    public function fetchAccountBalance(string $address, int $confirmations = 0): int
     {
         if ($confirmations === 0) {
             return $this->api->get("/addresses/balance/$address")['balance'];
