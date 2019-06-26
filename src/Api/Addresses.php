@@ -42,11 +42,11 @@ class Addresses
      */
     public function fetchAddresses(int $fromIdx = null, int $toIdx = null): array
     {
-        $struct_addresses = [];
+        $structAddresses = [];
         $response = $this->api->fetchAddresses($fromIdx, $toIdx);
-        foreach ($response as $txt_address) {
-            $struct_addresses[] = Address::getAddressByAddress($txt_address);
+        foreach ($response as $txtAddress) {
+            $structAddresses[] = Address::getAddressByAddress($txtAddress);
         }
-        return $struct_addresses;
+        return $structAddresses;
     }
 }
